@@ -90,8 +90,23 @@ if [ "$text" = "y" ]; then
 	else 
 		git clone git://github.com/Itseez/opencv.git
 		cd opencv*
-		git checkout 2.4.10
-		
+		git checkout -b 2.4.10
+	fi
+	echo -n "do you want to build all examples ??"
+	read text
+	mkdir build
+	cd build
+	if [ "$text" = "y" ]; then
+		cmake -DCMAKE_BUILD_TYPE=Release -D BUILD_EXAMPLES=ON ..
+	else
+		cmake -DCMAKE_BUILD_TYPE=Release ..
+	fi
+	echo "compiling opencv"
+	make -j$cores
+	sudo make install	
+	cd ..
+	echo "congratulations you've made it till the end"
+fi	
 	
 
 
