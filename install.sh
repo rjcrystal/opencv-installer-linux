@@ -6,6 +6,7 @@ mkdir setup
 cd setup
 cores=$(grep -c ^processor /proc/cpuinfo)
 cores=$(($cores * 2))
+Sourcesystem=$(uname -m)
 echo -n "update sources and install Dependencies (y for yes : n for no )> "
 read text
 if [ "$text" = "y" ]; then
@@ -29,7 +30,6 @@ if [ "$text" = "y" ]; then
 	tar jxf last_x264.tar.bz2
 	echo "setting up x264"
 	cd x264*
-	Sourcesystem=$(uname -m)
 	if [ "$Sourcesystem" = "x86_64" ]; then 
 		echo "configuring for 64-bit system"
 		./configure --enable-shared --enable-pic
